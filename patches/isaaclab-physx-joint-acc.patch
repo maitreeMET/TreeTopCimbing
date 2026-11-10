@@ -1,0 +1,13 @@
+diff --git a/source/isaaclab_physx/isaaclab_physx/assets/articulation/articulation_data.py b/source/isaaclab_physx/isaaclab_physx/assets/articulation/articulation_data.py
+index 017cda2..7f44cf2 100644
+--- a/source/isaaclab_physx/isaaclab_physx/assets/articulation/articulation_data.py
++++ b/source/isaaclab_physx/isaaclab_physx/assets/articulation/articulation_data.py
+@@ -1195,7 +1195,7 @@ class ArticulationData(BaseArticulationData):
+                 articulation_kernels.get_joint_acc_from_joint_vel,
+                 dim=(self._num_instances, self._num_joints),
+                 inputs=[
+-                    self.joint_vel,
++                    self.joint_vel.warp,
+                     self._previous_joint_vel,
+                     time_elapsed,
+                 ],
