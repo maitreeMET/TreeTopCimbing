@@ -27,3 +27,9 @@
 - Fixed locally: Isaac Lab 3.0.0 PhysX `joint_acc` passed a ProxyArray to a warp kernel
   (`patches/isaaclab-physx-joint-acc.patch`, apply in `~/isaac/IsaacLab` with `git apply`).
 - `/tmp/https` is owned by another user, so `isaaclab_env.sh` sets `TMPDIR=~/isaac/tmp`.
+- **Root cause of the PhysX + video failures: NVIDIA Vulkan is broken on bahamut.** The Vulkan
+  loader finds `/usr/share/vulkan/icd.d/nvidia_icd.json`, but `libGLX_nvidia.so.0` (595.71.05,
+  matches the kernel module) returns NULL for `vkCreateInstance`, so only llvmpipe (CPU) shows up.
+  Same result with the system loader 1.3.275, Isaac Sim's bundled loader 1.4.313, system/conda/uv
+  Python, and DISPLAY unset. Isaac Sim logs "Failed to create any GPU devices". Needs an admin to
+  look at the driver install. Newton training is unaffected (no Vulkan needed).
