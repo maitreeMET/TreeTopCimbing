@@ -14,3 +14,6 @@ if [ "$(hostname)" = tiamat ]; then _DEV=GPU-48ae2050-ef0d-f098-3ec1-9aa2f9367d2
 export CUDA_VISIBLE_DEVICES="${CUDA_VISIBLE_DEVICES:-$_DEV}"
 # Isaac Sim / Kit caches live under $HOME (root disk), which has space.
 alias il='uv run --project "$UV_PROJECT" --extra isaacsim --extra rsl-rl'
+# Make the `treetop` package importable (tasks register via --external_callback treetop.register_tasks)
+export TREETOP_ROOT="${TREETOP_ROOT:-$HOME/TreeTopClimbing}"
+export PYTHONPATH="$TREETOP_ROOT${PYTHONPATH:+:$PYTHONPATH}"
